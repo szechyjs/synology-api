@@ -9,6 +9,7 @@ namespace Synology\Applications;
 
 use Synology\Api\Authenticate;
 use Synology\Exception;
+use Synology\Applications\SurveillanceStation\CardHolder;
 
 class SurveillanceStation extends Authenticate
 {
@@ -98,6 +99,77 @@ class SurveillanceStation extends Authenticate
             'on' => $on,
         ];
         return $this->_request('HomeMode', static::$path, 'Switch', $parameters, 1);
+    }
+
+    /**
+     * @param int $start
+     * @param int $limit
+     * @param string $filterKeyword
+     * @param string $filterStatus
+     * @param int $filterCtrlerId
+     * @return array
+     */
+    public function enumCardHolder($start = null, $limit = null, $filterKeyword = null, $filterStatus = null, $filterCtrlerId = null)
+    {
+        $parameters = [
+            'blGetSortInfo' => true,
+            'sortInfo' => 'id,asc',
+            'start' => 0,
+            'limit' => 100
+        ];
+
+        if (isset($start)) {
+            $parameters['start'] = $start;
+        }
+        if (isset($limit)) {
+            $parameters['limit'] = $limit;
+        }
+        if (isset($filterKeyword)) {
+            $parameters['filterKeyword'] = $filterKeyword;
+        }
+        if (isset($filterStatus)) {
+            $parameters['filterStatus'] = $filterStatus;
+        }
+        if (isset($filterCtrlerId)) {
+            $parameters['filterCtrlerId'] = $filterCtrlerId;
+        }
+        $res = $this->_request('AxisAcsCtrler', static::$path, 'EnumCardHolder', $parameters, 1);
+        $cardHolders = array_map(array($this, 'dataToCardHolders'), $res->data);
+        $res->data = $cardHolders;
+        return $res;
+
+    }
+
+    /**
+     * @param array|CardHolder
+     */
+    public function saveCardHolders($data)
+    {
+        $cardHolders = is_array($data) ? $data : [$data];
+
+        $parameters = [
+            'arrayJson' => '"' . addslashes(json_encode($cardHolders)) . '"'
+        ];
+        return $this->_request('AxisAcsCtrler', static::$path, 'SaveCardHolder', $parameters, 1, 'post');
+    }
+
+    /**
+     * @param array|CardHolder
+     */
+    public function addCardHolders($data)
+    {
+        $cardHolders = is_array($data) ? $data : [$data];
+
+        $parameters = [
+            'arrayJson' => '"' . addslashes(json_encode($cardHolders)) . '"'
+        ];
+
+        return $this->_request('AxisAcsCtrler', static::$path, 'AddCardHolder', $parameters, 1, 'post');
+    }
+
+    private function dataToCardHolders($data)
+    {
+        return new CardHolder($data);
     }
 
 }

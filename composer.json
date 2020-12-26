@@ -1,5 +1,5 @@
 {
-    "name": "chmez/synology-api",
+    "name": "szechyjs/synology-api",
     "description": "Handle Synology API",
     "keywords": ["synology", "api"],
     "license": "MIT",
@@ -13,5 +13,10 @@
         "psr-0": {
             "Synology": "src/"
         }
+    },
+    "scripts": {
+        "test": [
+            "@php test.php"
+        ]
     }
 }

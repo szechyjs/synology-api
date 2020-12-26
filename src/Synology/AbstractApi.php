@@ -49,6 +49,13 @@ abstract class AbstractApi
                 400 => 'Operation Failed',
                 401 => 'Parameter invalid',
             ],
+            'AxisAcsCtrler' => [
+                400 => 'Execution failed',
+                401 => 'Parameter invalid',
+                402 => 'Camera disabled',
+                403 => 'Insufficient license',
+                404 => 'Codec activation failed'
+            ],
         ],
     ];
 
