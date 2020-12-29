@@ -1,5 +1,5 @@
 {
-    "name": "szechyjs/synology-api",
+    "name": "chmez/synology-api",
     "description": "Handle Synology API",
     "keywords": ["synology", "api"],
     "license": "MIT",

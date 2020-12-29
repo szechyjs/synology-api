@@ -3,36 +3,36 @@
 namespace Synology\Applications\SurveillanceStation;
 
 class CardHolder implements \JsonSerializable {
-    private $firstName; // string
-    private $lastName; // string
-    private $email; // string
-    private $employNo; // string?
-    private $description; // string?
-    private $department; // string?
-    private $extension; // 
-    private $title; // string?
-    private $pin; // int
-    private $cardNum; //
-    private $cardRaw; //
-    private $facilityCode; // int?
-    private $enableValidFrom; //
-    private $validFrom; // int
-    private $enableValidUntil; //
-    private $validUntil; //int
-    private $enableLongAccessTime = false;
-    private $delPhoto = false;
-    private $id; // int
-    private $acsRuleIds; // int []?
-    private $acsNameList = "";
-    private $lastAccess; // int
-    private $name; // string
-    private $photo;
-    private $photoName = "";
-    private $photoWidth = 0;
-    private $photoHeight = 0;
-    private $photoTimestamp = 0;
-    private $blocked; //
-    private $status; // int
+    public $firstName; // string
+    public $lastName; // string
+    public $email; // string
+    public $employNo; // string?
+    public $description; // string?
+    public $department; // string?
+    public $extension; // 
+    public $title; // string?
+    public $pin; // int
+    public $cardNum; //
+    public $cardRaw; //
+    public $facilityCode; // int?
+    public $enableValidFrom; //
+    public $validFrom; // int
+    public $enableValidUntil; //
+    public $validUntil; //int
+    public $enableLongAccessTime = false;
+    public $delPhoto = false;
+    public $id; // int
+    public $acsRuleIds; // int []?
+    public $acsNameList = "";
+    public $lastAccess; // int
+    public $name; // string
+    public $photo;
+    public $photoName = "";
+    public $photoWidth = 0;
+    public $photoHeight = 0;
+    public $photoTimestamp = 0;
+    public $blocked; //
+    public $status; // int
 
     public function __construct($data)
     {
@@ -58,10 +58,6 @@ class CardHolder implements \JsonSerializable {
         $this->enableValidUntil = $data->enable_valid_until;
         $this->validUntil = $data->valid_until;
         $this->validFrom = $data->valid_from;
-    }
-
-    public function getFirstName() {
-        return $this->firstName;
     }
 
     public function jsonSerialize() {

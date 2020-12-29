@@ -103,9 +103,12 @@ class SurveillanceStation extends Authenticate
 
     /**
      * @param int $start
+     *  (Optional) Defaults to 0
      * @param int $limit
+     *  (Optional) Defaults to 100
      * @param string $filterKeyword
-     * @param string $filterStatus
+     * @param int $filterStatus
+     *  (Optional) 0 - Normal, 1 - Expired, 2 - Blocked
      * @param int $filterCtrlerId
      * @return array
      */
@@ -126,6 +129,7 @@ class SurveillanceStation extends Authenticate
         }
         if (isset($filterKeyword)) {
             $parameters['filterKeyword'] = $filterKeyword;
+            $parameters['blKeyword'] = true;
         }
         if (isset($filterStatus)) {
             $parameters['filterStatus'] = $filterStatus;
